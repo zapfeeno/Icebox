@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
@@ -37,7 +38,11 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void addFoodItemFunction(View view) {
-        Toast.makeText(MainActivity.this, "Item Added", Toast.LENGTH_SHORT).show();
+
+        // Swith activity
+        Intent intent = new Intent(this, AddItemActivity.class);
+        startActivity(intent);
+
     }
 
     @Override
