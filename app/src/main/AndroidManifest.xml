@@ -13,6 +13,9 @@
         android:theme="@style/Theme.Icebox"
         tools:targetApi="31">
         <activity
+            android:name=".ItemInfoActivity"
+            android:exported="false" />
+        <activity
             android:name=".AddItemActivity"
             android:exported="false" />
         <activity
