@@ -12,6 +12,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
@@ -35,6 +36,13 @@ public class MainActivity extends AppCompatActivity {
 
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, dataList);
         listView.setAdapter(adapter);
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener(){
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l){
+                Intent intent = new Intent(getApplicationContext(), ItemInfoActivity.class);
+                intent.putExtra("itemName", adapter.getItem(i));
+                startActivity(intent);
+            }
+        });
     }
 
     public void addFoodItemFunction(View view) {
