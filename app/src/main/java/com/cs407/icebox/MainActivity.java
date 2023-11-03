@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -22,24 +23,43 @@ import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
+    public static ArrayList<boxItems> dataList = new ArrayList<>();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        ListView listView = findViewById(R.id.listView);
 
-        ArrayList<String> dataList = new ArrayList<>();
-        dataList.add("Eggs");
-        dataList.add("Milk");
-        dataList.add("Blueberries");
+        Context context = getApplicationContext();
+        SQLiteDatabase sqLiteDatabase = context.openOrCreateDatabase("storedItems", Context.MODE_PRIVATE, null);
+        DBHelper dbHelper = new DBHelper(sqLiteDatabase);
 
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, dataList);
+        // placeholder item, works
+        //dbHelper.addItem("Eggs", "11/01/2023", "11/20/2023");
+
+        dataList = dbHelper.readItems();
+
+        ArrayList<String> dataDisplay = new ArrayList<>();
+
+        // populate items from SQLite database?
+        //boxItems testItem = new boxItems("Eggs", "11/01/2023", "11/20/2023");
+
+        for(boxItems item: dataList) {
+            dataDisplay.add(String.format("%s", item.getItemName()));
+        }
+
+
+        ArrayAdapter adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, dataDisplay);
+        ListView listView = (ListView) findViewById(R.id.itemDisplay);
         listView.setAdapter(adapter);
+
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener(){
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l){
                 Intent intent = new Intent(getApplicationContext(), ItemInfoActivity.class);
-                intent.putExtra("itemName", adapter.getItem(i));
+                intent.putExtra("itemId", i);
+
+
                 startActivity(intent);
             }
         });
@@ -47,7 +67,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void addFoodItemFunction(View view) {
 
-        // Swith activity
+        // Switch activity
         Intent intent = new Intent(this, AddItemActivity.class);
         startActivity(intent);
 

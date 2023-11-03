@@ -10,12 +10,23 @@
         android:id="@+id/deleteItemButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="71dp"
+        android:layout_marginTop="100dp"
         android:onClick="deleteItem"
         android:text="Remove Item from Icebox"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView3" />
+        app:layout_constraintTop_toBottomOf="@+id/dateExpireText" />
+
+    <Button
+        android:id="@+id/goHomeButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="45dp"
+        android:onClick="returnToHome"
+        android:text="Return to list"
+        app:layout_constraintStart_toStartOf="@+id/deleteItemButton"
+        app:layout_constraintTop_toBottomOf="@+id/deleteItemButton" />
 
     <TextView
         android:id="@+id/title"
@@ -29,22 +40,23 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/dateAddedText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="26dp"
-        android:layout_marginTop="36dp"
-        android:text="Date added:"
-        app:layout_constraintStart_toStartOf="@+id/textView3"
+        android:layout_marginStart="124dp"
+        android:layout_marginTop="88dp"
+        android:text="Date added: mm/dd/yyyy"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/title" />
 
     <TextView
-        android:id="@+id/textView3"
+        android:id="@+id/dateExpireText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="41dp"
-        android:text="Days until Expiration:"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView2" />
+        android:layout_marginStart="1dp"
+        android:layout_marginTop="59dp"
+        android:text="Expiry date: mm/dd/yyyy"
+        app:layout_constraintStart_toStartOf="@+id/dateAddedText"
+        app:layout_constraintTop_toBottomOf="@+id/dateAddedText" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
