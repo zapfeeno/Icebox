@@ -46,4 +46,19 @@ public class DBHelper {
                 new String[]{itemName, purchaseDate, expDate});
     }
 
+/*
+    public void deleteItem(String itemName, String purchaseDate) {
+        createTable();
+        String date = "";
+        Cursor cursor = sqLiteDatabase.rawQuery("SELECT date FROM notes WHERE filename = ?",
+                new String[]{filename});
+        if(cursor.moveToNext()) {
+            date = cursor.getString(0);
+        }
+        sqLiteDatabase.execSQL("DELETE FROM notes WHERE filename = ? AND date = ?",
+                new String[]{filename,date});
+        cursor.close();
+    }
+*/
+
 }
