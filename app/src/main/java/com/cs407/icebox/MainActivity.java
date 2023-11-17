@@ -85,6 +85,8 @@ public class MainActivity extends AppCompatActivity {
         int itemId = item.getItemId();
         if (itemId == R.id.codeScanner) {
             Toast.makeText(this, "Code Scanner selected", Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(this, ScannerPage.class);
+            startActivity(intent);
             return true;
         }
         return super.onOptionsItemSelected(item);
