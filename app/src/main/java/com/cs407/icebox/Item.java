@@ -1,6 +1,6 @@
 package com.cs407.icebox;
 
-public class boxItems {
+public class Item {
 
     private String purchaseDate;
     private String expDate;
@@ -8,8 +8,7 @@ public class boxItems {
     private String id;
 
 
-    public boxItems(String itemName, String purchaseDate, String expDate, String id) {
-
+    public Item(String itemName, String purchaseDate, String expDate, String id) {
         this.itemName = itemName;
         this.purchaseDate = purchaseDate;
         this.expDate = expDate;

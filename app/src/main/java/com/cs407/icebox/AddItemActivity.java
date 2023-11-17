@@ -12,6 +12,11 @@ import android.widget.EditText;
 import java.util.Random;
 
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
+
 public class AddItemActivity extends AppCompatActivity {
 
 
@@ -29,11 +34,22 @@ public class AddItemActivity extends AppCompatActivity {
     }
 
     public void addToIcebox(View view) {
+
+        // Get from input fields
         EditText itemName = (EditText) findViewById(R.id.itemNameInput);
         EditText date = (EditText) findViewById(R.id.expirationDateInput);
+
+        // Get purchase date
+        DateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss", Locale.US);
+        String purchaseDate = dateFormat.format(new Date());
+
+        // Retrieve expiration date from input
+
+
+        // Generate random id
         Random random = new Random();
         String id = String.valueOf(1 + random.nextInt(1000000000));
-        dbHelper.addItem(id, itemName.getText().toString(), "placeholderDate", date.getText().toString());
+        dbHelper.addItem(id, itemName.getText().toString(), purchaseDate, date.getText().toString());
 
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);

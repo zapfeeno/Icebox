@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 
+// Item information page when you click into certain item
 public class ItemInfoActivity extends AppCompatActivity {
 
     String itemName;
@@ -43,7 +44,7 @@ public class ItemInfoActivity extends AppCompatActivity {
         dateExpired = (TextView) findViewById(R.id.dateExpireText);
 
         if(itemId != -1) {
-            boxItems item = MainActivity.dataList.get(itemId);
+            Item item = MainActivity.dataList.get(itemId);
 
             itemName = item.getItemName();
             purchaseDate = item.getPurchaseDate();

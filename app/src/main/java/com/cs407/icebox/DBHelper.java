@@ -15,11 +15,12 @@ public class DBHelper {
     }
 
     public static void createTable() {
-        sqLiteDatabase.execSQL("CREATE TABLE IF NOT EXISTS storedItems" +
-                "(id INTEGER PRIMARY KEY, itemId TEXT, itemName TEXT, purchaseDate TEXT, expDate TEXT)");
+        sqLiteDatabase.execSQL("CREATE TABLE IF NOT EXISTS storedItems" + "(id INTEGER PRIMARY KEY, itemId TEXT, itemName TEXT, purchaseDate TEXT, expDate TEXT)");
     }
 
-    public ArrayList<boxItems> readItems() {
+
+
+    public ArrayList<Item> readItems() {
         createTable();
         Cursor c = sqLiteDatabase.rawQuery("SELECT * FROM storedItems", (new String[]{}));
         int idIndex = c.getColumnIndex("id");
@@ -27,13 +28,13 @@ public class DBHelper {
         int purchaseIndex = c.getColumnIndex("purchaseDate");
         int expIndex = c.getColumnIndex("expDate");
         c.moveToFirst();
-        ArrayList<boxItems> itemList = new ArrayList<>();
+        ArrayList<Item> itemList = new ArrayList<>();
         while (!c.isAfterLast()) {
             String itemName = c.getString(itemIndex);
             String purchaseDate = c.getString(purchaseIndex);
             String expDate = c.getString(expIndex);
             String id = c.getString(idIndex);
-            boxItems item = new boxItems(itemName, purchaseDate, expDate, id);
+            Item item = new Item(itemName, purchaseDate, expDate, id);
             itemList.add(item);
             c.moveToNext();
         }
@@ -42,9 +43,9 @@ public class DBHelper {
         return itemList;
     }
 
+
     public void addItem(String id, String itemName, String purchaseDate, String expDate) {
         createTable();
-        //Log.i("id: ", id + " idddd");
         sqLiteDatabase.execSQL("INSERT INTO storedItems (id, itemName, purchaseDate, expDate) VALUES (?, ?, ?, ?)",
                 new String[]{id, itemName, purchaseDate, expDate});
     }
@@ -56,7 +57,4 @@ public class DBHelper {
         sqLiteDatabase.execSQL("DELETE FROM storedItems WHERE id = ? AND itemName = ?",
                 new String[]{id, iName});
     }
-
-
-
 }
