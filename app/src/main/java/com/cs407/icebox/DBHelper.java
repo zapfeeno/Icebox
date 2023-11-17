@@ -2,6 +2,7 @@ package com.cs407.icebox;
 
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
 
 import java.util.ArrayList;
 
@@ -46,19 +47,17 @@ public class DBHelper {
                 new String[]{itemName, purchaseDate, expDate});
     }
 
-/*
-    public void deleteItem(String itemName, String purchaseDate) {
+
+
+    public void removeItem(String iName, String pDate) {
         createTable();
-        String date = "";
-        Cursor cursor = sqLiteDatabase.rawQuery("SELECT date FROM notes WHERE filename = ?",
-                new String[]{filename});
-        if(cursor.moveToNext()) {
-            date = cursor.getString(0);
-        }
-        sqLiteDatabase.execSQL("DELETE FROM notes WHERE filename = ? AND date = ?",
-                new String[]{filename,date});
-        cursor.close();
+        Log.i("test", iName + "!, " + pDate);
+        sqLiteDatabase.execSQL("DELETE FROM storedItems WHERE itemName = ? AND purchaseDate = ?",
+                new String[]{iName, pDate});
+
+        Log.i("test", iName + "!!, " + pDate);
     }
-*/
+
+
 
 }
