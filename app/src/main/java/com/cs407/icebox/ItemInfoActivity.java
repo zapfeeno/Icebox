@@ -19,6 +19,7 @@ public class ItemInfoActivity extends AppCompatActivity {
     TextView name;
     TextView datePurchased;
     TextView dateExpired;
+    String id;
 
     private int itemId = -1;
 
@@ -46,6 +47,7 @@ public class ItemInfoActivity extends AppCompatActivity {
 
             itemName = item.getItemName();
             purchaseDate = item.getPurchaseDate();
+            id = item.getId();
 
             name.setText(item.getItemName());
             datePurchased.setText("Date added: " + item.getPurchaseDate());
@@ -62,7 +64,7 @@ public class ItemInfoActivity extends AppCompatActivity {
         // remove item from SQLite database
         Log.i("ItemInfoActivity", name.getText().toString() + ", " + datePurchased.getText().toString());
 
-        dbHelper.removeItem(itemName, purchaseDate);
+        dbHelper.removeItem(id, itemName);
 
         startActivity(intent);
     }

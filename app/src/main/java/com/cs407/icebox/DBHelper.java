@@ -16,12 +16,13 @@ public class DBHelper {
 
     public static void createTable() {
         sqLiteDatabase.execSQL("CREATE TABLE IF NOT EXISTS storedItems" +
-                "(id INTEGER PRIMARY KEY, itemId INTEGER, itemName TEXT, purchaseDate TEXT, expDate TEXT)");
+                "(id INTEGER PRIMARY KEY, itemId TEXT, itemName TEXT, purchaseDate TEXT, expDate TEXT)");
     }
 
     public ArrayList<boxItems> readItems() {
         createTable();
         Cursor c = sqLiteDatabase.rawQuery("SELECT * FROM storedItems", (new String[]{}));
+        int idIndex = c.getColumnIndex("id");
         int itemIndex = c.getColumnIndex("itemName");
         int purchaseIndex = c.getColumnIndex("purchaseDate");
         int expIndex = c.getColumnIndex("expDate");
@@ -31,8 +32,8 @@ public class DBHelper {
             String itemName = c.getString(itemIndex);
             String purchaseDate = c.getString(purchaseIndex);
             String expDate = c.getString(expIndex);
-
-            boxItems item = new boxItems(itemName, purchaseDate, expDate);
+            String id = c.getString(idIndex);
+            boxItems item = new boxItems(itemName, purchaseDate, expDate, id);
             itemList.add(item);
             c.moveToNext();
         }
@@ -41,21 +42,19 @@ public class DBHelper {
         return itemList;
     }
 
-    public void addItem(String itemName, String purchaseDate, String expDate) {
+    public void addItem(String id, String itemName, String purchaseDate, String expDate) {
         createTable();
-        sqLiteDatabase.execSQL("INSERT INTO storedItems (itemName, purchaseDate, expDate) VALUES (?, ?, ?)",
-                new String[]{itemName, purchaseDate, expDate});
+        //Log.i("id: ", id + " idddd");
+        sqLiteDatabase.execSQL("INSERT INTO storedItems (id, itemName, purchaseDate, expDate) VALUES (?, ?, ?, ?)",
+                new String[]{id, itemName, purchaseDate, expDate});
     }
 
 
 
-    public void removeItem(String iName, String pDate) {
+    public void removeItem(String id, String iName) {
         createTable();
-        Log.i("test", iName + "!, " + pDate);
-        sqLiteDatabase.execSQL("DELETE FROM storedItems WHERE itemName = ? AND purchaseDate = ?",
-                new String[]{iName, pDate});
-
-        Log.i("test", iName + "!!, " + pDate);
+        sqLiteDatabase.execSQL("DELETE FROM storedItems WHERE id = ? AND itemName = ?",
+                new String[]{id, iName});
     }
 
 

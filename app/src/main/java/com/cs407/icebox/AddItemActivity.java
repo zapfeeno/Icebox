@@ -9,6 +9,8 @@ import android.os.Bundle;
 import android.sax.StartElementListener;
 import android.view.View;
 import android.widget.EditText;
+import java.util.Random;
+
 
 public class AddItemActivity extends AppCompatActivity {
 
@@ -29,8 +31,9 @@ public class AddItemActivity extends AppCompatActivity {
     public void addToIcebox(View view) {
         EditText itemName = (EditText) findViewById(R.id.itemNameInput);
         EditText date = (EditText) findViewById(R.id.expirationDateInput);
-
-        dbHelper.addItem(itemName.getText().toString(), "placeholderDate", date.getText().toString());
+        Random random = new Random();
+        String id = String.valueOf(1 + random.nextInt(1000000000));
+        dbHelper.addItem(id, itemName.getText().toString(), "placeholderDate", date.getText().toString());
 
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
