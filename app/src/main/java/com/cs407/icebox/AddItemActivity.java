@@ -10,6 +10,12 @@ import android.sax.StartElementListener;
 import android.view.View;
 import android.widget.EditText;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
+import java.util.UUID;
+
 public class AddItemActivity extends AppCompatActivity {
 
 
@@ -27,10 +33,20 @@ public class AddItemActivity extends AppCompatActivity {
     }
 
     public void addToIcebox(View view) {
+
+        // Get from input fields
         EditText itemName = (EditText) findViewById(R.id.itemNameInput);
         EditText date = (EditText) findViewById(R.id.expirationDateInput);
 
-        dbHelper.addItem(itemName.getText().toString(), "placeholderDate", date.getText().toString());
+        // Get purchase date
+        DateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss", Locale.US);
+        String purchaseDate = dateFormat.format(new Date());
+
+        //TODO: Generate random ID for item to be added to the database
+        UUID randomId = UUID.randomUUID();
+        String itemId = randomId.toString();
+
+        dbHelper.addItem(itemId, itemName.getText().toString(), purchaseDate, date.getText().toString());
 
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);

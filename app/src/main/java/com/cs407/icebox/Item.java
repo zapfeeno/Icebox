@@ -1,13 +1,14 @@
 package com.cs407.icebox;
 
-public class boxItems {
+public class Item {
 
     private String purchaseDate;
     private String expDate;
     private String itemName;
+    private int id;
 
 
-    public boxItems(String itemName, String purchaseDate, String expDate) {
+    public Item(String itemName, String purchaseDate, String expDate) {
 
         this.itemName = itemName;
         this.purchaseDate = purchaseDate;
@@ -26,4 +27,6 @@ public class boxItems {
     public String getExpDate() {
         return expDate;
     }
+
+    public int getId() { return id; }
 }

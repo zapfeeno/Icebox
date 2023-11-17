@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 
+// Item information page when you click into certain item
 public class ItemInfoActivity extends AppCompatActivity {
 
     String itemName;
@@ -39,7 +40,7 @@ public class ItemInfoActivity extends AppCompatActivity {
         dateExpired = (TextView) findViewById(R.id.dateExpireText);
 
         if(itemId != -1) {
-            boxItems item = MainActivity.dataList.get(itemId);
+            Item item = MainActivity.dataList.get(itemId);
 
             name.setText(item.getItemName());
             datePurchased.setText("Date added: " + item.getPurchaseDate());
@@ -52,6 +53,7 @@ public class ItemInfoActivity extends AppCompatActivity {
 
     public void deleteItem(View view) {
         Intent intent = new Intent(this, MainActivity.class);
+
         // remove item from SQLite database
         startActivity(intent);
     }

@@ -23,7 +23,7 @@ import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
-    public static ArrayList<boxItems> dataList = new ArrayList<>();
+    public static ArrayList<Item> dataList = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,7 +45,7 @@ public class MainActivity extends AppCompatActivity {
         // populate items from SQLite database?
         //boxItems testItem = new boxItems("Eggs", "11/01/2023", "11/20/2023");
 
-        for(boxItems item: dataList) {
+        for(Item item: dataList) {
             dataDisplay.add(String.format("%s", item.getItemName()));
         }
 
