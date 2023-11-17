@@ -5,13 +5,15 @@ public class boxItems {
     private String purchaseDate;
     private String expDate;
     private String itemName;
+    private String id;
 
 
-    public boxItems(String itemName, String purchaseDate, String expDate) {
+    public boxItems(String itemName, String purchaseDate, String expDate, String id) {
 
         this.itemName = itemName;
         this.purchaseDate = purchaseDate;
         this.expDate = expDate;
+        this.id = id;
 
     }
 
@@ -25,5 +27,9 @@ public class boxItems {
 
     public String getExpDate() {
         return expDate;
+    }
+
+    public String getId() {
+        return id;
     }
 }
