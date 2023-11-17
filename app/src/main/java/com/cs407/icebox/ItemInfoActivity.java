@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -19,8 +20,11 @@ public class ItemInfoActivity extends AppCompatActivity {
     TextView name;
     TextView datePurchased;
     TextView dateExpired;
+    String id;
 
     private int itemId = -1;
+
+    DBHelper dbHelper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,7 +34,7 @@ public class ItemInfoActivity extends AppCompatActivity {
 
         Context context = getApplicationContext();
         SQLiteDatabase sqLiteDatabase = context.openOrCreateDatabase("storedItems", Context.MODE_PRIVATE, null);
-        DBHelper dbHelper = new DBHelper(sqLiteDatabase);
+        dbHelper = new DBHelper(sqLiteDatabase);
 
         Intent intent = getIntent();
         itemId = intent.getIntExtra("itemId", -1);
@@ -41,6 +45,10 @@ public class ItemInfoActivity extends AppCompatActivity {
 
         if(itemId != -1) {
             Item item = MainActivity.dataList.get(itemId);
+
+            itemName = item.getItemName();
+            purchaseDate = item.getPurchaseDate();
+            id = item.getId();
 
             name.setText(item.getItemName());
             datePurchased.setText("Date added: " + item.getPurchaseDate());
@@ -55,6 +63,10 @@ public class ItemInfoActivity extends AppCompatActivity {
         Intent intent = new Intent(this, MainActivity.class);
 
         // remove item from SQLite database
+        Log.i("ItemInfoActivity", name.getText().toString() + ", " + datePurchased.getText().toString());
+
+        dbHelper.removeItem(id, itemName);
+
         startActivity(intent);
     }
 

@@ -2,6 +2,7 @@ package com.cs407.icebox;
 
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
 
 import java.util.ArrayList;
 
@@ -14,13 +15,15 @@ public class DBHelper {
     }
 
     public static void createTable() {
-        sqLiteDatabase.execSQL("CREATE TABLE IF NOT EXISTS storedItems" +
-                "(id INTEGER PRIMARY KEY, itemId STRING, itemName TEXT, purchaseDate TEXT, expDate TEXT)");
+        sqLiteDatabase.execSQL("CREATE TABLE IF NOT EXISTS storedItems" + "(id INTEGER PRIMARY KEY, itemId TEXT, itemName TEXT, purchaseDate TEXT, expDate TEXT)");
     }
+
+
 
     public ArrayList<Item> readItems() {
         createTable();
         Cursor c = sqLiteDatabase.rawQuery("SELECT * FROM storedItems", (new String[]{}));
+        int idIndex = c.getColumnIndex("id");
         int itemIndex = c.getColumnIndex("itemName");
         int purchaseIndex = c.getColumnIndex("purchaseDate");
         int expIndex = c.getColumnIndex("expDate");
@@ -30,8 +33,8 @@ public class DBHelper {
             String itemName = c.getString(itemIndex);
             String purchaseDate = c.getString(purchaseIndex);
             String expDate = c.getString(expIndex);
-
-            Item item = new Item(itemName, purchaseDate, expDate);
+            String id = c.getString(idIndex);
+            Item item = new Item(itemName, purchaseDate, expDate, id);
             itemList.add(item);
             c.moveToNext();
         }
@@ -40,24 +43,18 @@ public class DBHelper {
         return itemList;
     }
 
-    public void addItem(String itemId, String itemName, String purchaseDate, String expDate) {
+
+    public void addItem(String id, String itemName, String purchaseDate, String expDate) {
         createTable();
-        sqLiteDatabase.execSQL("INSERT INTO storedItems (itemId, itemName, purchaseDate, expDate) VALUES (?, ?, ?, ?)",
-                new String[]{itemId, itemName, purchaseDate, expDate});
+        sqLiteDatabase.execSQL("INSERT INTO storedItems (id, itemName, purchaseDate, expDate) VALUES (?, ?, ?, ?)",
+                new String[]{id, itemName, purchaseDate, expDate});
     }
 
 
-    public void deleteItem(String itemId) {
-        createTable();
-        String purchaseDate = "";
-        Cursor cursor = sqLiteDatabase.rawQuery("SELECT purchaseDate FROM storedItems WHERE itemId = ?",
-                new String[]{itemId});
-        if(cursor.moveToNext()) {
-            purchaseDate = cursor.getString(0);
-        }
-        sqLiteDatabase.execSQL("DELETE FROM notes WHERE itemId = ? AND purchaseDate = ?",
-                new String[]{itemId, purchaseDate});
-        cursor.close();
-    }
 
+    public void removeItem(String id, String iName) {
+        createTable();
+        sqLiteDatabase.execSQL("DELETE FROM storedItems WHERE id = ? AND itemName = ?",
+                new String[]{id, iName});
+    }
 }

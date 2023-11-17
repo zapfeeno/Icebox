@@ -9,12 +9,13 @@ import android.os.Bundle;
 import android.sax.StartElementListener;
 import android.view.View;
 import android.widget.EditText;
+import java.util.Random;
+
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
-import java.util.UUID;
 
 public class AddItemActivity extends AppCompatActivity {
 
@@ -42,11 +43,13 @@ public class AddItemActivity extends AppCompatActivity {
         DateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss", Locale.US);
         String purchaseDate = dateFormat.format(new Date());
 
-        //TODO: Generate random ID for item to be added to the database
-        UUID randomId = UUID.randomUUID();
-        String itemId = randomId.toString();
+        // Retrieve expiration date from input
 
-        dbHelper.addItem(itemId, itemName.getText().toString(), purchaseDate, date.getText().toString());
+
+        // Generate random id
+        Random random = new Random();
+        String id = String.valueOf(1 + random.nextInt(1000000000));
+        dbHelper.addItem(id, itemName.getText().toString(), purchaseDate, date.getText().toString());
 
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);

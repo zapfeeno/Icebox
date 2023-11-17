@@ -5,14 +5,14 @@ public class Item {
     private String purchaseDate;
     private String expDate;
     private String itemName;
-    private int id;
+    private String id;
 
 
-    public Item(String itemName, String purchaseDate, String expDate) {
-
+    public Item(String itemName, String purchaseDate, String expDate, String id) {
         this.itemName = itemName;
         this.purchaseDate = purchaseDate;
         this.expDate = expDate;
+        this.id = id;
 
     }
 
@@ -28,5 +28,7 @@ public class Item {
         return expDate;
     }
 
-    public int getId() { return id; }
+    public String getId() {
+        return id;
+    }
 }
