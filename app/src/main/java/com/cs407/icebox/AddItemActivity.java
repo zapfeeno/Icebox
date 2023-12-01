@@ -15,6 +15,7 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import java.text.ParseException;
 import java.util.Calendar;
 import java.util.Random;
 
@@ -64,21 +65,44 @@ public class AddItemActivity extends AppCompatActivity {
 
         // Get from input fields
         EditText itemName = (EditText) findViewById(R.id.itemNameInput);
-        Button date = (Button) findViewById(R.id.expirationDateButton);
+        Button expirationDate = (Button) findViewById(R.id.expirationDateButton);
 
         // Get purchase date
-        DateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss", Locale.US);
+        DateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy", Locale.US);
         String purchaseDate = dateFormat.format(new Date());
 
         // Generate random id
         Random random = new Random();
         String id = String.valueOf(1 + random.nextInt(1000000000));
+
+        //
         if (selectedExpirationDate == null || selectedExpirationDate.isEmpty() || itemName.getText().toString().trim().length() == 0) {
             Toast.makeText(AddItemActivity.this, "Please enter a valid name and select an expiration date", Toast.LENGTH_LONG).show();
         } else {
-            dbHelper.addItem(id, itemName.getText().toString(), purchaseDate, date.getText().toString());
-            Intent intent = new Intent(this, MainActivity.class);
-            startActivity(intent);
+
+            try{
+
+                // Create a Date object from selected date string
+                Date expDate = dateFormat.parse(selectedExpirationDate);
+
+                Date today = new Date();
+
+                // If user entered a date that is in the past
+                if (today.compareTo(expDate)>0) {
+                    Toast.makeText(this, "Expiration day cannot be in the past, try again!", Toast.LENGTH_SHORT).show();
+                }
+                else {
+                    dbHelper.addItem(id, itemName.getText().toString(), purchaseDate, expirationDate.getText().toString());
+
+                    // Navigate back to the list
+                    Intent intent = new Intent(this, MainActivity.class);
+                    startActivity(intent);
+                }
+
+            } catch (ParseException e) {
+                // There shouldn't be a case where this error occurs
+            }
+
         }
     }
 }
