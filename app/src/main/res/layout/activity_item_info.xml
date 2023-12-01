@@ -6,26 +6,31 @@
     android:layout_height="match_parent"
     tools:context=".ItemInfoActivity">
 
-    <Button
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/deleteItemButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="100dp"
+        android:layout_width="169dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="38dp"
+        android:background="#555555"
         android:onClick="deleteItem"
         android:text="Remove Item from Icebox"
+        android:textColor="#CCCCCC"
+        app:layout_constraintBottom_toTopOf="@+id/goHomeButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/dateExpireText" />
 
-    <Button
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/goHomeButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="40dp"
-        android:layout_marginTop="45dp"
+        android:layout_width="171dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="183dp"
+        android:background="#50AAAC"
         android:onClick="returnToHome"
         android:text="Return to list"
-        app:layout_constraintStart_toStartOf="@+id/deleteItemButton"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/deleteItemButton" />
 
     <TextView
@@ -33,9 +38,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="100dp"
+        android:layout_marginBottom="88dp"
         android:text="Filler Name"
         android:textSize="42dp"
+        app:layout_constraintBottom_toTopOf="@+id/dateAddedText"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -43,9 +51,13 @@
         android:id="@+id/dateAddedText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="124dp"
-        android:layout_marginTop="88dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginBottom="60dp"
         android:text="Date added: mm/dd/yyyy"
+        android:textAlignment="center"
+        app:layout_constraintBottom_toTopOf="@+id/dateExpireText"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.445"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/title" />
 
@@ -54,9 +66,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="1dp"
-        android:layout_marginTop="59dp"
+        android:layout_marginBottom="80dp"
         android:text="Expiry date: mm/dd/yyyy"
-        app:layout_constraintStart_toStartOf="@+id/dateAddedText"
+        android:textAlignment="center"
+        app:layout_constraintBottom_toTopOf="@+id/deleteItemButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/dateAddedText" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
