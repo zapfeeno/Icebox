@@ -21,6 +21,7 @@ public class ItemInfoActivity extends AppCompatActivity {
     TextView datePurchased;
     TextView dateExpired;
     String id;
+    String displayName;
 
     private int itemId = -1;
 
@@ -50,7 +51,15 @@ public class ItemInfoActivity extends AppCompatActivity {
             purchaseDate = item.getPurchaseDate();
             id = item.getId();
 
-            name.setText(item.getItemName());
+
+            if(itemName.length() > 15) {
+                displayName = itemName.substring(0, 12) + "...";
+                name.setText(displayName);
+            } else {
+                name.setText(itemName);
+            }
+
+
             datePurchased.setText("Date added: " + item.getPurchaseDate());
             dateExpired.setText("Expiry date: " + item.getExpDate());
         }
