@@ -11,47 +11,52 @@
         android:id="@+id/titleText"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginTop="77dp"
+        android:layout_marginBottom="30dp"
         android:gravity="center_horizontal"
-        android:text="Add Manually"
-        android:textSize="60sp"
+        android:text="Add Item"
+        android:textSize="48sp"
         app:layout_constraintBottom_toTopOf="@+id/itemNameText"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.808" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/expirationDateText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="104dp"
-        android:layout_marginTop="28dp"
+        android:layout_marginStart="12dp"
         android:paddingTop="20dp"
         android:text="Enter Expiration Date Below"
         android:textSize="16sp"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/expirationDateButton"
+        app:layout_constraintStart_toStartOf="@+id/expirationDateButton"
         app:layout_constraintTop_toBottomOf="@+id/itemNameInput" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/expirationDateButton"
-        android:layout_width="235dp"
-        android:layout_height="127dp"
-        android:layout_marginTop="8dp"
+        android:layout_width="228dp"
+        android:layout_height="87dp"
+        android:layout_marginBottom="32dp"
         android:onClick="setExpiryDate"
         android:text="Select Expiration Date"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/addToIceboxButton"
+        app:layout_constraintEnd_toEndOf="@+id/addToIceboxButton"
+        app:layout_constraintStart_toStartOf="@+id/addToIceboxButton"
         app:layout_constraintTop_toBottomOf="@+id/expirationDateText" />
 
     <EditText
         android:id="@+id/itemNameInput"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
+        android:layout_width="388dp"
+        android:layout_height="77dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="48dp"
         android:ems="10"
         android:hint="Item name"
         android:inputType="text"
         android:paddingTop="20dp"
+        app:layout_constraintBottom_toTopOf="@+id/expirationDateText"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/itemNameText" />
@@ -60,25 +65,26 @@
         android:id="@+id/itemNameText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="144dp"
-        android:layout_marginTop="116dp"
         android:paddingTop="20dp"
         android:text="Enter Item Name"
         android:textSize="16sp"
+        app:layout_constraintBottom_toTopOf="@+id/itemNameInput"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/titleText" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/addToIceboxButton"
-        android:layout_width="226dp"
-        android:layout_height="83dp"
-        android:layout_marginTop="60dp"
-        android:layout_marginEnd="92dp"
+        android:layout_width="228dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="185dp"
         android:background="#50AAA9"
         android:gravity="center_horizontal|center_vertical"
         android:onClick="addToIcebox"
         android:text="+ Add to Icebox"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/expirationDateButton" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
