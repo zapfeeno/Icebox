@@ -7,6 +7,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.sqlite.SQLiteDatabase;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -19,7 +20,10 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -49,10 +53,18 @@ public class MainActivity extends AppCompatActivity {
             dataDisplay.add(String.format("%s", item.getItemName()));
         }
 
+        // Get color list
+        List<Integer> colorList = createColorList();
 
-        ArrayAdapter adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, dataDisplay);
+
+//        ArrayAdapter adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, dataDisplay);
+//        ListView listView = (ListView) findViewById(R.id.itemDisplay);
+//        listView.setAdapter(adapter);
+
+        // Creating the list
+        ColorAdaptor adaptor = new ColorAdaptor(this, dataList, colorList);
         ListView listView = (ListView) findViewById(R.id.itemDisplay);
-        listView.setAdapter(adapter);
+        listView.setAdapter(adaptor);
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener(){
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l){
@@ -90,5 +102,13 @@ public class MainActivity extends AppCompatActivity {
             return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    public List<Integer> createColorList() {
+
+        // TODO: Calculate the Color of each item
+        // placeholder
+        List<Integer> itemColors = Arrays.asList(Color.RED, Color.BLUE);
+        return itemColors;
     }
 }
