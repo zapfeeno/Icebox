@@ -8,10 +8,12 @@ import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.sax.StartElementListener;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import java.util.Calendar;
 import java.util.Random;
@@ -71,8 +73,8 @@ public class AddItemActivity extends AppCompatActivity {
         // Generate random id
         Random random = new Random();
         String id = String.valueOf(1 + random.nextInt(1000000000));
-        if (selectedExpirationDate == null || selectedExpirationDate.isEmpty()) {
-
+        if (selectedExpirationDate == null || selectedExpirationDate.isEmpty() || itemName.getText().toString().trim().length() == 0) {
+            Toast.makeText(AddItemActivity.this, "Please enter a valid name and select an expiration date", Toast.LENGTH_LONG).show();
         } else {
             dbHelper.addItem(id, itemName.getText().toString(), purchaseDate, date.getText().toString());
             Intent intent = new Intent(this, MainActivity.class);
