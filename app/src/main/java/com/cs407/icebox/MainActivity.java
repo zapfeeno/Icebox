@@ -100,7 +100,7 @@ public class MainActivity extends AppCompatActivity {
         int itemId = item.getItemId();
         if (itemId == R.id.codeScanner) {
             IntentIntegrator intentIntegrator = new IntentIntegrator(this);
-            intentIntegrator.setPrompt("Scan a barcode or QR Code");
+            intentIntegrator.setPrompt("Scan an item barcode");
             intentIntegrator.setOrientationLocked(true);
             intentIntegrator.initiateScan();
             return true;
