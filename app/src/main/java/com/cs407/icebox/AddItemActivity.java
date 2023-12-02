@@ -36,6 +36,9 @@ public class AddItemActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_item);
 
+        EditText itemName = (EditText) findViewById(R.id.itemNameInput);
+        itemName.setText(getIntent().getStringExtra("ITEM_NAME"));
+
         Context context = getApplicationContext();
         SQLiteDatabase sqLiteDatabase = context.openOrCreateDatabase("storedItems", Context.MODE_PRIVATE, null);
         dbHelper = new DBHelper(sqLiteDatabase);

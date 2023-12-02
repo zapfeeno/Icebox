@@ -20,6 +20,14 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
 import android.util.Log;
+import android.os.AsyncTask;
+
+import org.json.JSONObject;
+
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
+import java.io.IOException;
 
 
 import java.util.ArrayList;
@@ -108,10 +116,40 @@ public class MainActivity extends AppCompatActivity {
         IntentResult intentResult = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
         if (intentResult != null) {
             if (intentResult.getContents() != null) {
-                Toast.makeText(getBaseContext(), intentResult.getContents(), Toast.LENGTH_SHORT).show();
+                new GetProductNameTask().execute(intentResult.getContents());
             }
         } else {
             super.onActivityResult(requestCode, resultCode, data);
         }
     }
+
+    private class GetProductNameTask extends AsyncTask<String, Void, String> {
+        OkHttpClient client = new OkHttpClient();
+
+        @Override
+        protected String doInBackground(String... barcodes) {
+            Request request = new Request.Builder()
+                    .url("https://world.openfoodfacts.org/api/v0/product/" + barcodes[0] + ".json")
+                    .build();
+            try (Response response = client.newCall(request).execute()) {
+                JSONObject jsonResponse = new JSONObject(response.body().string());
+                JSONObject product = jsonResponse.getJSONObject("product");
+                return product.getString("product_name");
+            } catch (Exception e) {
+                e.printStackTrace();
+                return null;
+            }
+        }
+
+        @Override
+        protected void onPostExecute(String productName) {
+            super.onPostExecute(productName);
+            if (productName != null) {
+                Intent intent = new Intent(MainActivity.this, AddItemActivity.class);
+                intent.putExtra("ITEM_NAME", productName);
+                startActivity(intent);
+            }
+        }
+    }
+
 }
