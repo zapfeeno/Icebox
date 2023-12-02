@@ -106,12 +106,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         IntentResult intentResult = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
-        // if the intentResult is null then
-        // toast a message as "cancelled"
         if (intentResult != null) {
             if (intentResult.getContents() != null) {
-                // if the intentResult is not null we'll set
-                // the content and format of scan message
                 Toast.makeText(getBaseContext(), intentResult.getContents(), Toast.LENGTH_SHORT).show();
             }
         } else {
