@@ -28,7 +28,19 @@ import okhttp3.Request;
 import okhttp3.Response;
 import java.io.IOException;
 
+import android.graphics.Color;
+import java.lang.reflect.Array;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Arrays;
+import java.util.Date;
+import java.util.List;
+import java.util.Locale;
+import java.util.concurrent.TimeUnit;
 
+
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 import androidx.annotation.Nullable;
@@ -50,22 +62,21 @@ public class MainActivity extends AppCompatActivity {
         SQLiteDatabase sqLiteDatabase = context.openOrCreateDatabase("storedItems", Context.MODE_PRIVATE, null);
         DBHelper dbHelper = new DBHelper(sqLiteDatabase);
 
-        // placeholder item, works
-        //dbHelper.addItem("Eggs", "11/01/2023", "11/20/2023");
 
         dataList = dbHelper.readItems();
 
         ArrayList<String> dataDisplay = new ArrayList<>();
 
-        // populate items from SQLite database?
-        //boxItems testItem = new boxItems("Eggs", "11/01/2023", "11/20/2023");
 
         for(Item item: dataList) {
             dataDisplay.add(String.format("%s", item.getItemName()));
         }
 
+        // Get color list
+        List<Integer> colorList = createColorList();
 
-        ArrayAdapter adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, dataDisplay);
+
+        ColorAdaptor adapter = new ColorAdaptor(this, dataList, colorList);
         ListView listView = (ListView) findViewById(R.id.itemDisplay);
         listView.setAdapter(adapter);
 
@@ -148,6 +159,45 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         }
+    }
+
+    public List<Integer> createColorList() {
+
+        // Current Threshold:
+        // <=1 days red
+        // <=4 days yellow
+        // else green
+
+        ArrayList<Integer> colorList = new ArrayList<Integer> ();
+
+        for(Item item : dataList) {
+
+            SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy", Locale.US);
+            Date today = new Date();
+
+            String expirationDate = item.getExpDate();
+
+            try{
+                Date expDate = dateFormat.parse(expirationDate);
+
+                // Compare date of today with expDate
+                long milliDifference = Math.abs(expDate.getTime()-today.getTime());
+                long dateDifference = TimeUnit.DAYS.convert(milliDifference, TimeUnit.MILLISECONDS);
+                Log.d("bug","" + dateDifference);
+
+                if(dateDifference<=1) {
+                    colorList.add(Color.rgb(255,92,100));
+                } else if(dateDifference<=4) {
+                    colorList.add(Color.rgb(255,247,156));
+                } else {
+                    colorList.add(Color.rgb(100,202,152));
+                }
+            } catch (ParseException e) {
+                // Do nothing bc there will be no exceptions
+            }
+        }
+
+        return colorList;
     }
 
 }
