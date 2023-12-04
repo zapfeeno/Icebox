@@ -21,9 +21,15 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import java.lang.reflect.Array;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
+import java.util.concurrent.TimeUnit;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -106,9 +112,40 @@ public class MainActivity extends AppCompatActivity {
 
     public List<Integer> createColorList() {
 
-        // TODO: Calculate the Color of each item
-        // placeholder
-        List<Integer> itemColors = Arrays.asList(Color.RED, Color.BLUE);
-        return itemColors;
+        // Current Threshold:
+        // <=3 days red
+        // <=7 days yellow
+        // else green
+
+        ArrayList<Integer> colorList = new ArrayList<Integer> ();
+
+        for(Item item : dataList) {
+
+            SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy", Locale.US);
+            Date today = new Date();
+
+            String expirationDate = item.getExpDate();
+
+            try{
+                Date expDate = dateFormat.parse(expirationDate);
+
+                // Compare date of today with expDate
+                long milliDifference = Math.abs(expDate.getTime()-today.getTime());
+                long dateDifference = TimeUnit.DAYS.convert(milliDifference, TimeUnit.MILLISECONDS);
+                Log.d("bug","" + dateDifference);
+
+                if(dateDifference<=3) {
+                    colorList.add(Color.rgb(255,92,100));
+                } else if(dateDifference<=7) {
+                    colorList.add(Color.rgb(255,247,156));
+                } else {
+                    colorList.add(Color.rgb(100,202,152));
+                }
+            } catch (ParseException e) {
+                // Do nothing bc there will be no exceptions
+            }
+        }
+
+        return colorList;
     }
 }
