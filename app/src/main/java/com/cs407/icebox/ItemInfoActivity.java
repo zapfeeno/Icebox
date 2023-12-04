@@ -60,7 +60,7 @@ public class ItemInfoActivity extends AppCompatActivity {
             }
 
 
-            datePurchased.setText("Date added: " + item.getPurchaseDate());
+            datePurchased.setText("Date added: " + item.getPurchaseDate().substring(0,10));
             dateExpired.setText("Expiry date: " + item.getExpDate());
         }
 
