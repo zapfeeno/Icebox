@@ -113,8 +113,8 @@ public class MainActivity extends AppCompatActivity {
     public List<Integer> createColorList() {
 
         // Current Threshold:
-        // <=3 days red
-        // <=7 days yellow
+        // <=1 days red
+        // <=4 days yellow
         // else green
 
         ArrayList<Integer> colorList = new ArrayList<Integer> ();
@@ -134,9 +134,9 @@ public class MainActivity extends AppCompatActivity {
                 long dateDifference = TimeUnit.DAYS.convert(milliDifference, TimeUnit.MILLISECONDS);
                 Log.d("bug","" + dateDifference);
 
-                if(dateDifference<=3) {
+                if(dateDifference<=1) {
                     colorList.add(Color.rgb(255,92,100));
-                } else if(dateDifference<=7) {
+                } else if(dateDifference<=4) {
                     colorList.add(Color.rgb(255,247,156));
                 } else {
                     colorList.add(Color.rgb(100,202,152));
