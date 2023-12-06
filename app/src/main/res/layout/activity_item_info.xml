@@ -8,70 +8,72 @@
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/deleteItemButton"
-        android:layout_width="169dp"
-        android:layout_height="0dp"
-        android:layout_marginBottom="38dp"
+        android:layout_width="314dp"
+        android:layout_height="80dp"
         android:background="#555555"
         android:onClick="deleteItem"
         android:text="Remove Item from Icebox"
         android:textColor="#CCCCCC"
-        app:layout_constraintBottom_toTopOf="@+id/goHomeButton"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.494"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/dateExpireText" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.632" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/goHomeButton"
-        android:layout_width="171dp"
-        android:layout_height="0dp"
-        android:layout_marginBottom="183dp"
+        android:layout_width="319dp"
+        android:layout_height="81dp"
         android:background="#50AAAC"
         android:onClick="returnToHome"
         android:text="Return to list"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.521"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/deleteItemButton" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.779" />
 
     <TextView
         android:id="@+id/title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="100dp"
-        android:layout_marginBottom="88dp"
         android:text="Filler Name"
         android:textSize="42dp"
-        app:layout_constraintBottom_toTopOf="@+id/dateAddedText"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.182" />
 
     <TextView
         android:id="@+id/dateAddedText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:layout_marginBottom="60dp"
         android:text="Date added: mm/dd/yyyy"
         android:textAlignment="center"
-        app:layout_constraintBottom_toTopOf="@+id/dateExpireText"
+        android:textSize="18dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.445"
+        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/title" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.337" />
 
     <TextView
         android:id="@+id/dateExpireText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="1dp"
-        android:layout_marginBottom="80dp"
         android:text="Expiry date: mm/dd/yyyy"
         android:textAlignment="center"
-        app:layout_constraintBottom_toTopOf="@+id/deleteItemButton"
+        android:textSize="18dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.49"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/dateAddedText" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.449" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
