@@ -9,57 +9,58 @@
 
     <TextView
         android:id="@+id/titleText"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="77dp"
-        android:layout_marginBottom="30dp"
+        android:layout_width="268dp"
+        android:layout_height="68dp"
         android:gravity="center_horizontal"
         android:text="Add Item"
         android:textSize="48sp"
-        app:layout_constraintBottom_toTopOf="@+id/itemNameText"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.461"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.127" />
 
     <TextView
         android:id="@+id/expirationDateText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="12dp"
         android:paddingTop="20dp"
         android:text="Enter Expiration Date Below"
-        android:textSize="16sp"
-        app:layout_constraintBottom_toTopOf="@+id/expirationDateButton"
-        app:layout_constraintStart_toStartOf="@+id/expirationDateButton"
-        app:layout_constraintTop_toBottomOf="@+id/itemNameInput" />
+        android:textSize="18dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.475" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/expirationDateButton"
-        android:layout_width="228dp"
-        android:layout_height="87dp"
-        android:layout_marginBottom="32dp"
+        android:layout_width="251dp"
+        android:layout_height="88dp"
         android:onClick="setExpiryDate"
         android:text="Select Expiration Date"
-        app:layout_constraintBottom_toTopOf="@+id/addToIceboxButton"
-        app:layout_constraintEnd_toEndOf="@+id/addToIceboxButton"
-        app:layout_constraintStart_toStartOf="@+id/addToIceboxButton"
-        app:layout_constraintTop_toBottomOf="@+id/expirationDateText" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/expirationDateText"
+        app:layout_constraintVertical_bias="0.022" />
 
     <EditText
         android:id="@+id/itemNameInput"
-        android:layout_width="388dp"
-        android:layout_height="77dp"
-        android:layout_marginStart="10dp"
-        android:layout_marginEnd="10dp"
-        android:layout_marginBottom="48dp"
+        android:layout_width="294dp"
+        android:layout_height="67dp"
         android:ems="10"
         android:hint="Item name"
         android:inputType="text"
         android:paddingTop="20dp"
-        app:layout_constraintBottom_toTopOf="@+id/expirationDateText"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/itemNameText" />
+        app:layout_constraintTop_toBottomOf="@+id/itemNameText"
+        app:layout_constraintVertical_bias="0.012" />
 
     <TextView
         android:id="@+id/itemNameText"
@@ -67,17 +68,18 @@
         android:layout_height="wrap_content"
         android:paddingTop="20dp"
         android:text="Enter Item Name"
-        android:textSize="16sp"
-        app:layout_constraintBottom_toTopOf="@+id/itemNameInput"
+        android:textSize="18dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/titleText" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.27" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/addToIceboxButton"
-        android:layout_width="228dp"
-        android:layout_height="0dp"
-        android:layout_marginBottom="185dp"
+        android:layout_width="283dp"
+        android:layout_height="83dp"
         android:background="#50AAA9"
         android:gravity="center_horizontal|center_vertical"
         android:onClick="addToIcebox"
@@ -85,6 +87,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/expirationDateButton" />
+        app:layout_constraintTop_toBottomOf="@+id/expirationDateButton"
+        app:layout_constraintVertical_bias="0.266" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
