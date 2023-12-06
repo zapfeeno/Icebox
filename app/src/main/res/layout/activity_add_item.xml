@@ -37,20 +37,20 @@
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/expirationDateButton"
-        android:layout_width="261dp"
-        android:layout_height="130dp"
+        android:layout_width="267dp"
+        android:layout_height="94dp"
         android:onClick="setExpiryDate"
         android:text="Select Expiration Date"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.612" />
+        app:layout_constraintVertical_bias="0.594" />
 
     <EditText
         android:id="@+id/itemNameInput"
-        android:layout_width="353dp"
-        android:layout_height="76dp"
+        android:layout_width="294dp"
+        android:layout_height="67dp"
         android:ems="10"
         android:hint="Item name"
         android:inputType="text"
