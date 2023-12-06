@@ -33,19 +33,19 @@
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.478" />
+        app:layout_constraintVertical_bias="0.475" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/expirationDateButton"
-        android:layout_width="267dp"
-        android:layout_height="94dp"
+        android:layout_width="266dp"
+        android:layout_height="118dp"
         android:onClick="setExpiryDate"
         android:text="Select Expiration Date"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.594" />
+        app:layout_constraintTop_toBottomOf="@+id/expirationDateText"
+        app:layout_constraintVertical_bias="0.022" />
 
     <EditText
         android:id="@+id/itemNameInput"
@@ -57,9 +57,10 @@
         android:paddingTop="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.349" />
+        app:layout_constraintTop_toBottomOf="@+id/itemNameText"
+        app:layout_constraintVertical_bias="0.012" />
 
     <TextView
         android:id="@+id/itemNameText"
@@ -87,6 +88,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.794" />
+        app:layout_constraintVertical_bias="0.78" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
