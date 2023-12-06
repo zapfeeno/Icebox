@@ -37,8 +37,8 @@
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/expirationDateButton"
-        android:layout_width="266dp"
-        android:layout_height="118dp"
+        android:layout_width="251dp"
+        android:layout_height="88dp"
         android:onClick="setExpiryDate"
         android:text="Select Expiration Date"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -78,8 +78,8 @@
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/addToIceboxButton"
-        android:layout_width="313dp"
-        android:layout_height="68dp"
+        android:layout_width="292dp"
+        android:layout_height="78dp"
         android:background="#50AAA9"
         android:gravity="center_horizontal|center_vertical"
         android:onClick="addToIcebox"
@@ -87,7 +87,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.78" />
+        app:layout_constraintTop_toBottomOf="@+id/expirationDateButton"
+        app:layout_constraintVertical_bias="0.266" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
