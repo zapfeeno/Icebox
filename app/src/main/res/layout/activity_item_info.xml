@@ -8,8 +8,8 @@
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/deleteItemButton"
-        android:layout_width="314dp"
-        android:layout_height="80dp"
+        android:layout_width="320dp"
+        android:layout_height="81dp"
         android:background="#555555"
         android:onClick="deleteItem"
         android:text="Remove Item from Icebox"
@@ -19,21 +19,22 @@
         app:layout_constraintHorizontal_bias="0.494"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.632" />
+        app:layout_constraintVertical_bias="0.627" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/goHomeButton"
-        android:layout_width="319dp"
-        android:layout_height="81dp"
+        android:layout_width="320dp"
+        android:layout_height="83dp"
+        android:layout_marginBottom="132dp"
         android:background="#50AAAC"
         android:onClick="returnToHome"
         android:text="Return to list"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.521"
+        app:layout_constraintHorizontal_bias="0.494"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.779" />
+        app:layout_constraintTop_toBottomOf="@+id/deleteItemButton"
+        app:layout_constraintVertical_bias="0.413" />
 
     <TextView
         android:id="@+id/title"
@@ -52,6 +53,7 @@
         android:id="@+id/dateAddedText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="560dp"
         android:text="Date added: mm/dd/yyyy"
         android:textAlignment="center"
         android:textSize="18dp"
@@ -59,8 +61,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.337" />
+        app:layout_constraintTop_toBottomOf="@+id/title"
+        app:layout_constraintVertical_bias="0.787" />
 
     <TextView
         android:id="@+id/dateExpireText"
@@ -73,7 +75,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.49"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.449" />
+        app:layout_constraintTop_toBottomOf="@+id/dateAddedText"
+        app:layout_constraintVertical_bias="0.088" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
