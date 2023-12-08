@@ -5,5 +5,6 @@
         android:id="@+id/codeScanner"
         android:title="Code Scanner"
         android:icon="@drawable/codescanner"
+        android:fontFamily="@font/raleway_font"
         app:showAsAction="ifRoom" />
 </menu>
