@@ -1,13 +1,22 @@
 package com.cs407.icebox;
 
+import static com.cs407.icebox.NotificationHelper.ALARM_TYPE_RTC;
+
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.Manifest;
+import android.app.AlarmManager;
+import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.database.sqlite.SQLiteDatabase;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -34,6 +43,7 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
@@ -44,6 +54,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
 
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
@@ -51,12 +62,34 @@ import com.google.zxing.integration.android.IntentResult;
 public class MainActivity extends AppCompatActivity {
 
     public static ArrayList<Item> dataList = new ArrayList<>();
+    private final ActivityResultLauncher<String> requestPermissionLauncher =
+            registerForActivityResult(new ActivityResultContracts.RequestPermission(), isGranted -> {
+                if(!isGranted){
+                    Toast.makeText(this, "Please allow all notifications to continue", Toast.LENGTH_LONG).show();
+                }
+            });
+    static PendingIntent alarmIntentRTC;
+    static AlarmManager alarmManagerRTC;
 
+    private void requestPermission(){
+        if(Build.VERSION.SDK_INT < Build.VERSION_CODES.TIRAMISU){
+            return;
+        }
+        if(ContextCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.POST_NOTIFICATIONS) != PackageManager.PERMISSION_GRANTED){
+            requestPermissionLauncher.launch(Manifest.permission.POST_NOTIFICATIONS);
+        }
+    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        requestPermission();
+        //NotificationHelper.scheduleRepeatingRTCNotification(this, "12", "0");
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            NotificationHelper.createNotificationChannel(this);
+        }
+        scheduleRepeatingRTCNotification(this, "11", "59");
 
         Context context = getApplicationContext();
         SQLiteDatabase sqLiteDatabase = context.openOrCreateDatabase("storedItems", Context.MODE_PRIVATE, null);
@@ -207,6 +240,32 @@ public class MainActivity extends AppCompatActivity {
         }
 
         return colorList;
+    }
+
+    public static void scheduleRepeatingRTCNotification(Context context, String hour, String min) {
+        //get calendar instance to be able to select what time notification should be scheduled
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTimeInMillis(System.currentTimeMillis());
+        //Setting time of the day (8am here) when notification will be sent every day (default)
+        calendar.set(Calendar.HOUR_OF_DAY,
+                Integer.getInteger(hour, 11),
+                Integer.getInteger(min, 59));
+
+        //Setting intent to class where Alarm broadcast message will be handled
+        Intent intent = new Intent(context, AlarmReceiver.class);
+        //Setting alarm pending intent
+        alarmIntentRTC = PendingIntent.getBroadcast(context, ALARM_TYPE_RTC, intent, PendingIntent.FLAG_MUTABLE | PendingIntent.FLAG_UPDATE_CURRENT);
+
+        //getting instance of AlarmManager service
+        alarmManagerRTC = (AlarmManager)context.getSystemService(ALARM_SERVICE);
+
+        //Setting alarm to wake up device every day for clock time.
+        //AlarmManager.RTC_WAKEUP is responsible to wake up device for sure, which may not be good practice all the time.
+        // Use this when you know what you're doing.
+        //Use RTC when you don't need to wake up device, but want to deliver the notification whenever device is woke-up
+        //We'll be using RTC.WAKEUP for demo purpose only
+        alarmManagerRTC.setInexactRepeating(AlarmManager.RTC_WAKEUP,
+                calendar.getTimeInMillis(), AlarmManager.INTERVAL_DAY, alarmIntentRTC);
     }
 
 }
